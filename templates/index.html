@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}}</title>
+  <script src="{{static_url('js/jquery.min.js')}}"></script>
+  <script>
+    $(function() {
+      var ws = new WebSocket('ws:192.168.11.7/websocket');
+      ws.onopen = function() {}
+      ws.onmessage = function(e) {}
+      function send(data) {
+				console.log(data);
+        ws.send(JSON.stringify(data));
+      }
+
+      $('#steer').change(function (e) {
+				var value = $(this).val();
+				send({operation: 'steer', value: value});
+      });
+
+    });
+  </script>
+</head>
+<body>
+  <input id="steer" type="range" min="0" max="100">
+</body>
+</html>
